@@ -62,9 +62,9 @@ export const signin = async (req, res, next) => {
     //Step 2 Save this token as cookie and send baack response
     res
       .cookie("access_token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
+        httpOnly: true, // Prevents client-side access (optional but recommended)
+        secure: true, // ✅ Required for HTTPS (Netlify)
+        sameSite: "None", // ✅ Required for cross-origin requests
         path: "/",
       })
       .status(200)
