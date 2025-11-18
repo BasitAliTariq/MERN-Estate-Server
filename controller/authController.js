@@ -60,7 +60,14 @@ export const signin = async (req, res, next) => {
     //Now seperate the password from other user details because we did not want to sen back pasword along with details
     const { password: pass, ...rest } = validUser._doc;
     //Step 2 Save this token as cookie and send baack response
-    res.cookie("acces_token", token, { httpOnly: true }).status(200).json(rest);
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .status(200)
+      .json(rest);
   } catch (error) {
     next(error);
   }
@@ -89,7 +96,11 @@ export const google = async (req, res, next) => {
       const { password: pass, ...rest } = user._doc;
       //Step 2 Save this token as cookie and send baack response
       res
-        .cookie("access_token", token, { httpOnly: true })
+        .cookie("access_token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        })
         .status(200)
         .json(rest);
     } else {
@@ -126,7 +137,11 @@ export const google = async (req, res, next) => {
 
 export const signOut = (req, res, next) => {
   try {
-    res.clearCookie("access_token");
+    res.clearCookie("access_token", {
+      sameSite: "none",
+      secure: true,
+    });
+
     res.status(200).json("User has been logged out!");
   } catch (error) {
     next(error);
