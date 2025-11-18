@@ -5,6 +5,7 @@ import userRoute from "./route/userRoutes.js";
 import authRoute from "./route/authRoutes.js";
 import cookieParser from "cookie-parser";
 import listingRoute from "./route/listingRoute.js";
+
 const app = express();
 
 //connection with database
