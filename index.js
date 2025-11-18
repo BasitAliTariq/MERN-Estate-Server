@@ -18,6 +18,15 @@ app.use(cookieParser());
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/listing", listingRoute);
+app.use(
+  cors({
+    origin: [
+      "https://mern-estate-client-nu.vercel.app",
+      "http://localhost:5173",
+    ], // Allow multiple origins
+    credentials: true,
+  })
+);
 
 app.use((error, req, res, next) => {
   // Ye error ka parameter authController me sign up function se error le ker ara hai
