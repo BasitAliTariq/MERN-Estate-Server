@@ -16,9 +16,6 @@ app.use(express.json());
 //ye allow kerta hai ke req json me ae gi agr is ke bagair keray gay to undefined ae ga
 
 app.use(cookieParser());
-app.use("/api/user", userRoute);
-app.use("/api/auth", authRoute);
-app.use("/api/listing", listingRoute);
 app.use(
   cors({
     origin: [
@@ -28,6 +25,9 @@ app.use(
     credentials: true,
   })
 );
+app.use("/api/user", userRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/listing", listingRoute);
 
 app.use((error, req, res, next) => {
   // Ye error ka parameter authController me sign up function se error le ker ara hai
